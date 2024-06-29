@@ -1,34 +1,16 @@
 "use server"
 
-import { prisma } from "@/lib/prisma";
+import prisma from "@/lib/prisma";
 import { getCurrentUser } from "@/lib/session";
 
-type User = {
-    id: string;
-    name: string | null;
-    email: string | null;
-    emailVerified: Date | null;
-    image: string | null;
-    admin: boolean;
-};
-
-type Post = {
-    id: number;
-    text: string;
-    completed: boolean;
-    createdAt: Date;
-    userId: string;
-    user: User;
-};
-
-export const getPosts = async (): Promise<Post[]> => {
+export const getPosts = async () => {
     try {
         const posts = await prisma.post.findMany({
             include: {
                 user: true
             }
         });
-        return posts as Post[];
+        return posts;
     } catch (error) {
         console.log(error);
         return [];
