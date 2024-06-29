@@ -21,7 +21,7 @@ type Props = {
 }
 
 export default function AllPost(props : Props) {
-
+    
     const {data : session} = useSession()
 
     const sortedPosts = [...props.allPost].sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime());

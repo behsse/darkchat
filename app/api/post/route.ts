@@ -14,8 +14,6 @@ export const getPosts = async () => {
     } catch (error) {
         console.log(error);
         return [];
-    }finally{
-        prisma.$disconnect();
     }
 }
 
