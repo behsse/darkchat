@@ -17,6 +17,18 @@ export const getPosts = async () => {
     }
 }
 
+export const getAllPosts = async () => {
+    const data = await prisma.post.findMany({
+        include: {
+            user: true
+        },
+        orderBy: {
+            createdAt: "desc"
+        }
+    });
+    return data
+}
+
 export const getPostById = async (id: number) => {
     try {
         const getPostById = await prisma.post.findUnique({
