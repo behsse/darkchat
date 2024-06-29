@@ -3,20 +3,6 @@
 import prisma from "@/lib/prisma";
 import { getCurrentUser } from "@/lib/session";
 
-export const getPosts = async () => {
-    try {
-        const posts = await prisma.post.findMany({
-            include: {
-                user: true
-            }
-        });
-        return posts;
-    } catch (error) {
-        console.log(error);
-        return [];
-    }
-}
-
 export const getAllPosts = async () => {
     const data = await prisma.post.findMany({
         include: {
