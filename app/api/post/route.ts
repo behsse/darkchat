@@ -13,6 +13,7 @@ export const getPosts = async () => {
         return getPosts;
     } catch (error) {
         console.log(error);
+        return [];
     }finally{
         prisma.$disconnect();
     }
