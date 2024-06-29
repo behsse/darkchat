@@ -1,0 +1,53 @@
+"use server"
+
+import { prisma } from "@/lib/prisma";
+import { getCurrentUser } from "@/lib/session";
+
+export const getPosts = async () => {
+    try {
+        const getPosts = await prisma.post.findMany({
+            include: {
+                user: true
+            }
+        });
+        return getPosts;
+    } catch (error) {
+        console.log(error);
+        return [];
+    }finally{
+        prisma.$disconnect();
+    }
+}
+
+export const getPostById = async (id: number) => {
+    try {
+        const getPostById = await prisma.post.findUnique({
+            where : {
+                id : id
+            }
+        })
+        return getPostById
+    } catch (error) {
+        console.log(error);
+    }finally{
+        prisma.$disconnect();
+    }
+}
+
+export const createPost = async (formData : FormData) => {
+    const user = await getCurrentUser()
+
+    try {
+        const results = await prisma.post.create ({
+            data: {
+                text : formData.get("text") as string,
+                userId : user?.id as string
+            }
+        })
+        return results
+    } catch (error) {
+        console.log(error);
+    }finally{
+        prisma.$disconnect();
+    }
+}
