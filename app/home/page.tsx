@@ -22,11 +22,11 @@ export default async function page() {
                 <CardHeader>
                   <div className="flex items-center justify-between w-full">
                     <div className="flex items-center gap-3">
-                      <img src={post.user.image ?? ''} alt="" className="w-6 rounded-full"/>
-                          <p>{post.user.name}</p>
-                      </div>
-                      <p className="text-sm text-foreground/40">{format(new Date(post.createdAt), 'd MMM yyyy')}</p>
-                      </div>
+                      {/* <img src={post.user.image ?? ''} alt="" className="w-6 rounded-full"/>
+                      <p>{post.user.name}</p> */}
+                    </div>
+                    <p className="text-sm text-foreground/40">{format(new Date(post.createdAt), 'd MMM yyyy')}</p>
+                  </div>
                 </CardHeader>
                 <LinkifyComponant>
                   <CardContent style={{ whiteSpace: 'pre-wrap' }}>
