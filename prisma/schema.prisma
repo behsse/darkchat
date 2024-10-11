@@ -38,13 +38,19 @@ model Session {
 model User {
   id            String    @id @default(cuid())
   name          String?
+  username      String?    @unique
   email         String?   @unique
   emailVerified DateTime?
   image         String?
   admin         Boolean @default(false)
-  Post          Post[]
+  posts         Post[]
   accounts      Account[]
   sessions      Session[]
+
+  bio           String?
+  likes         Like[]
+  followers     Follow[] @relation("followers")
+  following     Follow[] @relation("following")
 }
 
 
@@ -57,10 +63,32 @@ model VerificationToken {
 }
 
 model Post {
-  id          Int @id @unique @default(autoincrement())
+  id          String @id @default(cuid())
   text        String
   completed   Boolean @default(false)
   createdAt   DateTime @default(now())
   userId      String 
+  parentId    String?
   user        User @relation(fields: [userId], references: [id])
+  likes       Like[]
+  replies     Post[] @relation("replies")
+  parent      Post?  @relation("replies", fields: [parentId], references: [id])
+}
+
+model Like {
+  id          String @id @default(cuid())
+  userId      String 
+  postId      String 
+  likeAt      DateTime @default(now())
+  user        User @relation(fields: [userId], references: [id])
+  post        Post @relation(fields: [postId], references: [id])
+}
+
+model Follow {
+  id          String @id @default(cuid())
+  followerId  String
+  followingId String 
+  followAt    DateTime @default(now())
+  followers   User @relation("followers", fields: [followerId], references: [id])
+  following   User @relation("following", fields: [followingId], references: [id])
 }
