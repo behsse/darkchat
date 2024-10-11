@@ -43,7 +43,6 @@ export const authOptions : NextAuthOptions = {
                             provider: account.provider,
                             providerAccountId: account.providerAccountId,
                             type: account.type,
-                            // Ajoutez d'autres champs si nécessaire
                         }
                     });
                 }
@@ -58,5 +57,6 @@ export const authOptions : NextAuthOptions = {
             }
             return session
         }
-    }
+    },
+    secret: process.env.AUTH_SECRET
 }
