@@ -28,9 +28,23 @@ export default function Home() {
   return (
     <div className='w-full'>
       <div className="grid gap-4">
-        {userPosts.map((post) => (
-          <PostCard key={post.id} id={post.id} userId={post.userId} username={post.user.username ?? ''} image={post.user.image ?? ''} name={post.user.name ?? ''} text={post.text ?? ''} createdAt={post.createdAt} admin={session?.user.admin ?? false} setUserPosts={setUserPosts}/>
-        ))} 
+        {userPosts.length === 0 ? (
+          <p>No posts available</p>
+        ) : (
+          userPosts.map((post) => (
+            <PostCard
+              key={post.id}
+              id={post.id}
+              userId={post.userId}
+              username={post.user.username ?? ""}
+              image={post.user.image ?? ""}
+              name={post.user.name ?? ""}
+              text={post.text ?? ""}
+              createdAt={post.createdAt}
+              admin={session?.user.admin ?? false}
+            />
+          ))
+        )}
       </div>
     </div>
   );

@@ -2,7 +2,7 @@
 import { MessageCircle, Loader } from 'lucide-react';
 import { useSession } from 'next-auth/react';
 import Link from 'next/link';
-import { use, useEffect, useState, useTransition } from 'react'
+import { useEffect, useState, useTransition } from 'react'
 
 type Props = {
     postId : string;
