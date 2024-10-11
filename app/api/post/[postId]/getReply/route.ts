@@ -13,6 +13,10 @@ export async function GET(req: Request) {
             },
         });
 
+        if(!replyCount){
+            return NextResponse.json({ replyCount: 0 });
+        }
+        
         return NextResponse.json({
             replyCount,
         });
