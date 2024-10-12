@@ -24,6 +24,16 @@ export const GET = async (request: Request) => {
         image: true,
         admin: true,
         bio: true,
+        followers: {
+          select: {
+            id: true,
+          },
+        },
+        following: {
+          select: {
+            id: true,
+          },
+        },
         posts: {
           where: {
             parentId: null,
@@ -44,6 +54,7 @@ export const GET = async (request: Request) => {
             },
           },
         },
+
       }
     });
 

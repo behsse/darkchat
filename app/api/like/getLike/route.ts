@@ -14,10 +14,10 @@ export async function GET(req: Request) {
         });
 
         const isLikedByUser = await prisma.like.findFirst({
-        where: {
-            postId: postId || undefined,
-            userId: userId || undefined,
-        },
+            where: {
+                postId: postId || undefined,
+                userId: userId || undefined,
+            },
         });
 
         return NextResponse.json({

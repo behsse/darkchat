@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { AlertDialog, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog";
 import { Input } from "@/components/ui/input";
 import FollowButton from "@/components/FollowButton";
+import FollowLink from "@/components/FollowLink";
 
 const UserPage = ({params}: {params: {username: string}}) => {
 
@@ -154,6 +155,7 @@ const UserPage = ({params}: {params: {username: string}}) => {
                             }
                         </div>
                         <p>{user.bio}</p>
+                        <FollowLink/>
                     </div>
                 </div>
             </div>
