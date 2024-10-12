@@ -6,7 +6,7 @@ export const GET = async (req: Request) => {
     const postId = searchParams.get('postId');
 
     if (!postId) {
-        return NextResponse.json({ replyCount: 10 });
+        return NextResponse.json({ replyCount: null });
     }
 
     try {
