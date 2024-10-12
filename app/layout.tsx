@@ -21,16 +21,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="flex w-full justify-center max-md:px-2">
-      <SessionWrapper>
-        <PostProvider>
+      <PostProvider>
+        <SessionWrapper>
           <body className={cn("w-[600px] h-full", inter.className)}>
             <ThemeProvider attribute="class" defaultTheme="system">
               <Navbar/>
               {children}
             </ThemeProvider>
           </body>
-        </PostProvider>
-      </SessionWrapper>
+        </SessionWrapper>
+      </PostProvider>
     </html>
   );
 }

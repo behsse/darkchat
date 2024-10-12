@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { useEffect, useState } from "react";
 import { Post } from "@/lib/type";
@@ -7,30 +7,35 @@ import { usePosts } from "@/lib/PostContext";
 import PostCard from "@/components/PostCard";
 
 const AllPost = () => {
-    const [userPosts, setUserPosts] = useState<Post[]>([]);
-    const {data : session} = useSession()
-    const { posts } = usePosts();
+  const [userPosts, setUserPosts] = useState<Post[]>([]);
+  const { data: session } = useSession();
+  const { posts, addPost } = usePosts();
+
+  useEffect(() => {
+    const fetchAllPosts = async () => {
+      try {
+        const response = await fetch("/api/post/getAllPosts");
+        const data: Post[] = await response.json();
+        setUserPosts(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
     
-    useEffect(() => {
-      const fetchAllPosts = async () => {
-        try {
-          const response = await fetch("/api/post/getAllPosts");
-          const data: Post[] = await response.json();
-          setUserPosts(data);
-          
-        } catch (error) {
-          console.log(error);
-        }
-      };
-      fetchAllPosts();
-    }, [posts]);
+    fetchAllPosts();
+  }, []);
+
+  useEffect(() => {
+    setUserPosts(posts);
+  }, [posts]);
+
   return (
     <div className="grid gap-4">
-    {userPosts.length === 0 ? (
+      {userPosts.length === 0 ? (
         <p>No posts available</p>
-        ) : (
+      ) : (
         userPosts.map((post) => (
-            <PostCard
+          <PostCard
             key={post.id}
             id={post.id}
             userId={post.userId}
@@ -40,11 +45,11 @@ const AllPost = () => {
             text={post.text ?? ""}
             createdAt={post.createdAt}
             admin={session?.user.admin ?? false}
-            />
+          />
         ))
-    )}
-  </div>
-  )
-}
+      )}
+    </div>
+  );
+};
 
-export default AllPost
+export default AllPost;
