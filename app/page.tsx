@@ -18,11 +18,28 @@ export default function Home() {
         const response = await fetch("/api/post/getAllPosts");
         const data: Post[] = await response.json();
         setUserPosts(data);
+        
       } catch (error) {
         console.log(error);
       }
     };
     fetchAllPosts();
+  }, [posts]);
+
+  useEffect(() => {
+    const fetchAllPosts = async () => {
+        try {
+            const response = await fetch("/api/post/getAllPosts");
+            const data: Post[] = await response.json();
+            setUserPosts(data);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    if (posts.length > 0) {
+        fetchAllPosts();
+    }
   }, [posts]);
 
   return (
