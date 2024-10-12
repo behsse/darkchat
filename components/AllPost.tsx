@@ -9,7 +9,6 @@ import PostCard from "@/components/PostCard";
 const AllPost = () => {
   const [userPosts, setUserPosts] = useState<Post[]>([]);
   const { data: session } = useSession();
-  const { posts, addPost } = usePosts();
 
   useEffect(() => {
     const fetchAllPosts = async () => {
@@ -25,10 +24,6 @@ const AllPost = () => {
     fetchAllPosts();
   }, []);
 
-  useEffect(() => {
-    setUserPosts(posts);
-  }, [posts]);
-
   return (
     <div className="grid gap-4">
       {userPosts.length === 0 ? (
@@ -39,12 +34,12 @@ const AllPost = () => {
             key={post.id}
             id={post.id}
             userId={post.userId}
-            username={post.user.username ?? ""}
-            image={post.user.image ?? ""}
-            name={post.user.name ?? ""}
+            username={post.user?.username ?? ""}
+            image={post.user?.image ?? ""}
+            name={post.user?.name ?? ""}
             text={post.text ?? ""}
             createdAt={post.createdAt}
-            admin={session?.user.admin ?? false}
+            admin={session?.user?.admin ?? false}
           />
         ))
       )}
