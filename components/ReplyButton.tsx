@@ -17,7 +17,7 @@ const ReplyButton = (props: Props) => {
     useEffect(() => {
         const fetchRepliesCount = async () => {
             try {
-                const response = await fetch(`/api/post/${props.postId}/getReply?postId=${props.postId}`);
+                const response = await fetch(`/api/post/getReply?postId=${props.postId}`);
                 const data = await response.json();
                 setReplyCount(data.replyCount);
             } catch (error) {
