@@ -45,7 +45,7 @@ const PostCard = (props: Props) => {
                     <div className="flex items-center justify-between w-full">
                         <div className="flex items-center gap-2">
                         <img src={props.image ?? ''} alt="" className="w-9 rounded-full"/>
-                            <Link href={`${props.username}`}>
+                            <Link href={`/${props.username}`}>
                                 <div className='flex items-center justify-center gap-2'>
                                     <p className='underline-offset-2 hover:underline'>{props.name}</p>
                                     <p className="text-foreground/40">@{props.username}</p>
