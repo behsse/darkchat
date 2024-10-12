@@ -26,7 +26,7 @@ const ReplyButton = (props: Props) => {
         };
 
         fetchRepliesCount();
-    }, [replyCount, session]);
+    }, [props.postId, session]);
 
     return (
         <Link href={`/${props.username}/post/${props.postId}`} className='flex items-center gap-2 hover:text-blue-500'>
