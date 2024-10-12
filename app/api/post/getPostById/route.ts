@@ -60,6 +60,7 @@ export const GET = async (request: Request) => {
           },
         },
       },
+      
     });
 
     if (!data) {

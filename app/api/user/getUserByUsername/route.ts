@@ -53,8 +53,10 @@ export const GET = async (request: Request) => {
               },
             },
           },
+          orderBy: {
+            createdAt: "desc",
+          },
         },
-
       }
     });
 
