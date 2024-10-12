@@ -12,7 +12,7 @@ type Props = {
 const ReplyButton = (props: Props) => {
     let [isPending, startTransition] = useTransition()
     const {data : session} = useSession()
-    const [replyCount, setReplyCount] = useState(0);
+    const [replyCount, setReplyCount] = useState();
 
     useEffect(() => {
         const fetchRepliesCount = async () => {
@@ -26,7 +26,7 @@ const ReplyButton = (props: Props) => {
         };
 
         fetchRepliesCount();
-    }, [props.postId, session]);
+    }, [replyCount, session]);
 
     return (
         <Link href={`/${props.username}/post/${props.postId}`} className='flex items-center gap-2 hover:text-blue-500'>
