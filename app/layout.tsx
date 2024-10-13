@@ -5,7 +5,6 @@ import "./globals.css";
 import { SessionWrapper } from "@/lib/SessionWrapper";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import Navbar from "@/components/Navbar";
-import { PostProvider } from "@/lib/PostContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,14 +21,12 @@ export default function RootLayout({
   return (
     <html lang="en" className="flex w-full justify-center max-md:px-2">
       <SessionWrapper>
-        <PostProvider>
           <body className={cn("w-[600px] h-full", inter.className)}>
             <ThemeProvider attribute="class" defaultTheme="system">
               <Navbar/>
               {children}
             </ThemeProvider>
           </body>
-        </PostProvider>
       </SessionWrapper>
     </html>
   );
