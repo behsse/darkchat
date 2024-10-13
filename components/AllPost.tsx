@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import { Post } from "@/lib/type";
 import { useSession } from "next-auth/react";
-import { usePosts } from "@/lib/PostContext";
 import PostCard from "@/components/PostCard";
 
 const AllPost = () => {
