@@ -24,7 +24,6 @@ import { Textarea } from './ui/textarea'
 import { Button } from './ui/button'
 import { useSession } from "next-auth/react";
 import { ThemeToggle } from './ui/dark-mode'
-import { usePosts } from "@/lib/PostContext";
 import Link from "next/link";
 
 export default function Navbar() {
@@ -32,7 +31,6 @@ export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
     const [alertMessage, setAlertMessage] = useState<string | null>(null);
     const {data : session} = useSession();
-    const { addPost } = usePosts();
     
     const createPost = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -51,7 +49,6 @@ export default function Navbar() {
             
             if (response.ok) {
                 const newPost = await response.json();
-                addPost(newPost);
                 setIsOpen(false);
             }
             
