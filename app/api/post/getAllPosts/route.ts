@@ -14,8 +14,11 @@ export const GET = async () => {
         createdAt: "desc",
       },
     });
-      
-    return NextResponse.json(data);
+    const response = NextResponse.json(data);
+    response.headers.set("Cache-Control", "no-store, max-age=0");       
+    response.headers.set("Pragma", "no-store");       
+    response.headers.set("Expires", "0");       
+    return response;
   } 
   catch (error) {
     console.error("Error fetching posts:", error);
