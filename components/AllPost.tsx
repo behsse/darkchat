@@ -4,24 +4,30 @@ import { useEffect, useState } from "react";
 import { Post } from "@/lib/type";
 import { useSession } from "next-auth/react";
 import PostCard from "@/components/PostCard";
+import { useRouter } from "next/navigation";
 
 const AllPost = () => {
   const [userPosts, setUserPosts] = useState<Post[]>([]);
+  const [forceUpdate, setForceUpdate] = useState(0);
   const { data: session } = useSession();
+  const router = useRouter();
+
+  const fetchAllPosts = async () => {
+    try {
+      const response = await fetch(`/api/post/getAllPosts?uid=${Date.now()}`);
+      const data: Post[] = await response.json();
+      setUserPosts(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
-    const fetchAllPosts = async () => {
-      try {
-        const response = await fetch("/api/post/getAllPosts");
-        const data: Post[] = await response.json();
-        setUserPosts(data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    
     fetchAllPosts();
-  }, []);
+    const eventListener = () => fetchAllPosts();
+    window.addEventListener('post-updated', eventListener);
+    return () => window.removeEventListener('post-updated', eventListener);
+  }, [forceUpdate]);
 
   return (
     <div className="grid gap-4">
